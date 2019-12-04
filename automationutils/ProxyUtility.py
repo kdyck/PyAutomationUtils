@@ -1,9 +1,7 @@
 import requests
-import self
 
 from automationutils.UserAgentUtility import UserAgentUtility
 from automationutils.WebDriverManager import WebDriverManager
-
 
 driver = WebDriverManager()
 
@@ -36,7 +34,8 @@ class ProxyUtility:
             print(
                 "Using User Agent: " + user_agent)  # TODO: Store user agent list to file and read file to avoid all the browser session
             try:
-                response = requests.get(url, headers={'User-Agent':user_agent}, proxies={"http":proxy, "https":proxy})
+                response = requests.get(url, headers={'User-Agent': user_agent},
+                                        proxies={"http": proxy, "https": proxy})
                 json_response = response.json()
                 print("Using HTTP proxy %s" + json_response)
                 break
@@ -47,7 +46,6 @@ class ProxyUtility:
         if 'Skipping. Proxy Connection error!' in json_response:
             ProxyUtility().get_response_with_user_agent_and_proxy(url)
         return response
-
 
 # Remove comment # from below to test base implementation
 # RandomProxy().get_response_with_user_agent_and_proxy('https://httpbin.org/user-agent')
